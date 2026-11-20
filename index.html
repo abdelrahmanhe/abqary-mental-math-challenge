@@ -1,0 +1,1419 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي الأبطال - منصة عبقري للحساب الذهني والسوروبان</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#14213D',
+                            light: '#1e325c',
+                            dark: '#0d1527'
+                        },
+                        gold: {
+                            DEFAULT: '#F7B733',
+                            light: '#f5c35c',
+                            dark: '#d99b1c'
+                        },
+                        teal: {
+                            DEFAULT: '#00A896',
+                            dark: '#008072'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f1f5f9;
+            min-height: 100dvh;
+            overscroll-behavior-y: contain;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button, input, select {
+            touch-action: manipulation;
+        }
+
+        /* إجبار الأرقام الإنجليزية وعلامة السالب على اليسار فقط */
+        .en-num {
+            direction: ltr;
+            unicode-bidi: isolate;
+            display: inline-block;
+            font-variant-numeric: tabular-nums;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.84) translateZ(0); opacity: 0; }
+            75% { transform: scale(1.03) translateZ(0); opacity: 1; }
+            100% { transform: scale(1) translateZ(0); opacity: 1; }
+        }
+
+        .animate-pop {
+            will-change: transform, opacity;
+            animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes celebratePulse {
+            0%, 100% { transform: scale(1) translateZ(0); }
+            50% { transform: scale(1.05) translateZ(0); }
+        }
+
+        .animate-celebrate {
+            will-change: transform;
+            animation: celebratePulse 0.8s ease-in-out infinite;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificateModal, #certificatePrintable, #certificatePrintable * {
+                visibility: visible;
+            }
+            #certificateModal {
+                position: fixed;
+                inset: 0;
+                background: white !important;
+                padding: 0 !important;
+            }
+            #certificatePrintable {
+                box-shadow: none !important;
+                border: 4px solid #14213D !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .no-print-cert {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between select-none">
+
+    <!-- Toast Notification (بديل احترافي لـ alert) -->
+    <div id="toastBox" class="fixed bottom-5 left-5 z-50 hidden transition-all duration-300">
+        <div class="bg-navy text-white border-r-4 border-gold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold">
+            <i class="fa-solid fa-circle-info text-gold text-base"></i>
+            <span id="toastMessage">تم التحديث</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-navy text-white shadow-xl border-b-4 border-gold sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gold flex items-center justify-center text-navy font-black text-2xl shadow-inner border border-white/20">
+                    🏆
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-base sm:text-lg md:text-xl text-gold tracking-wide">
+                        منصة عبقري للحساب الذهني والسوروبان - <span class="text-white">تحدي الأبطال</span>
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-2 text-xs text-slate-300 font-medium mt-0.5">
+                        <span>إشراف: <span class="text-white font-bold">مستر عبدالرحمن منصور</span></span>
+                        <span class="text-gold/50">|</span>
+                        <a href="tel:01007673634" class="en-num text-gold hover:underline font-bold flex items-center gap-1" dir="ltr">
+                            <i class="fa-solid fa-phone text-[10px]"></i> 01007673634
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header Actions: WhatsApp, Certificate, Sound, Reset -->
+            <div class="flex items-center gap-2 flex-wrap">
+                <a href="https://wa.me/201007673634?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%85%D8%B3%D8%AA%D8%B1%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B1%D8%AD%D9%85%D9%86%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D9%85%D9%86%D8%B5%D8%A9%20%D8%B9%D8%A8%D9%82%D8%B1%D9%8A%20%D9%84%D9%84%D8%AD%D8%B3%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B0%D9%87%D9%86%D9%8A" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow transition">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span class="hidden sm:inline">واتساب</span>
+                </a>
+                <button onclick="openCertificateModal()" class="bg-gold hover:bg-gold-dark text-navy px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 shadow transition">
+                    <i class="fa-solid fa-award text-sm"></i>
+                    <span>بطاقة البطل</span>
+                </button>
+                <button id="soundToggleBtn" onclick="toggleSound()" class="bg-navy-light hover:bg-white/10 text-gold border border-gold/40 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition" title="تشغيل / كتم الصوت">
+                    <i id="soundIcon" class="fa-solid fa-volume-high"></i>
+                    <span id="soundLabel" class="hidden md:inline">الصوت مفعل</span>
+                </button>
+                <button onclick="resetStats()" class="bg-red-600/90 hover:bg-red-600 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow transition" title="تصفير الإحصائيات">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span class="hidden sm:inline">تصفير</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-5 w-full flex-grow flex flex-col gap-5">
+
+        <!-- Hero Name & Live Statistics Bar -->
+        <section class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+            <!-- Hero Name Input Card -->
+            <div class="col-span-2 lg:col-span-1 bg-white rounded-2xl p-3 shadow-sm border-b-4 border-navy flex flex-col justify-center">
+                <label for="heroNameInput" class="text-[11px] font-extrabold text-navy mb-1 flex items-center gap-1">
+                    <i class="fa-solid fa-user-astronaut text-gold-dark"></i>
+                    اسم البطل / المتدرب:
+                </label>
+                <input type="text" id="heroNameInput" placeholder="اكتب اسم البطل هنا..." oninput="saveHeroName(this.value)" class="w-full bg-slate-50 border border-slate-300 focus:border-navy rounded-lg px-2.5 py-1.5 text-xs font-extrabold text-navy outline-none">
+            </div>
+
+            <!-- Correct Answers -->
+            <div class="bg-white rounded-2xl p-3 shadow-sm border-b-4 border-teal flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] font-bold text-slate-500">إجابات صحيحة</p>
+                    <p id="correctCount" class="en-num text-2xl font-black text-teal mt-0.5">0</p>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-teal/10 text-teal flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+
+            <!-- Wrong Answers -->
+            <div class="bg-white rounded-2xl p-3 shadow-sm border-b-4 border-red-500 flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] font-bold text-slate-500">إجابات خاطئة</p>
+                    <p id="wrongCount" class="en-num text-2xl font-black text-red-600 mt-0.5">0</p>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+            </div>
+
+            <!-- Total Score Points -->
+            <div class="bg-white rounded-2xl p-3 shadow-sm border-b-4 border-gold flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] font-bold text-slate-500">نقاط البطل</p>
+                    <p id="scorePoints" class="en-num text-2xl font-black text-navy mt-0.5">0</p>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-gold/20 text-gold-dark flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+            </div>
+
+            <!-- Streak Counter -->
+            <div id="streakCard" class="bg-white rounded-2xl p-3 shadow-sm border-b-4 border-orange-500 flex items-center justify-between transition-all">
+                <div>
+                    <p class="text-[11px] font-bold text-slate-500">سلسلة الفوز 🔥</p>
+                    <p id="streakCount" class="en-num text-2xl font-black text-orange-600 mt-0.5">0</p>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                
+                <!-- 1. Pure Stepper: Speed Control (Seconds: 1s to 20s, step 1s, NO slider) -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <label class="text-xs font-extrabold text-navy mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-stopwatch text-teal"></i>
+                        زمن السرعة (بالثواني):
+                    </label>
+                    <div class="flex items-center justify-between gap-2 bg-white p-1.5 rounded-xl border border-slate-300 shadow-inner">
+                        <button type="button" onclick="adjustSpeed(-1)" aria-label="تقليل السرعة ثانية" class="w-11 h-11 rounded-lg bg-slate-100 hover:bg-navy hover:text-gold active:scale-95 text-navy font-black text-xl transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-minus text-sm"></i>
+                        </button>
+                        <div class="flex-grow text-center">
+                            <span id="speedDisplay" class="en-num text-xl font-black text-navy">2</span>
+                            <span class="text-xs font-extrabold text-slate-600 mr-1">ثانية</span>
+                        </div>
+                        <button type="button" onclick="adjustSpeed(1)" aria-label="زيادة السرعة ثانية" class="w-11 h-11 rounded-lg bg-slate-100 hover:bg-navy hover:text-gold active:scale-95 text-navy font-black text-xl transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-plus text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Pure Stepper: Operations Count (2 to 20, NO slider) -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <label class="text-xs font-extrabold text-navy mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-layer-group text-teal"></i>
+                        عدد العمليات بالمسألة:
+                    </label>
+                    <div class="flex items-center justify-between gap-2 bg-white p-1.5 rounded-xl border border-slate-300 shadow-inner">
+                        <button type="button" onclick="adjustOps(-1)" aria-label="تقليل العمليات" class="w-11 h-11 rounded-lg bg-slate-100 hover:bg-navy hover:text-gold active:scale-95 text-navy font-black text-xl transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-minus text-sm"></i>
+                        </button>
+                        <div class="flex-grow text-center">
+                            <span id="opsDisplay" class="en-num text-xl font-black text-teal">4</span>
+                            <span class="text-xs font-extrabold text-slate-600 mr-1">عمليات</span>
+                        </div>
+                        <button type="button" onclick="adjustOps(1)" aria-label="زيادة العمليات" class="w-11 h-11 rounded-lg bg-slate-100 hover:bg-navy hover:text-gold active:scale-95 text-navy font-black text-xl transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-plus text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Pure Stepper: Session Problems Target (5 to 50, step 5, NO slider) -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <label class="text-xs font-extrabold text-navy mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bullseye text-gold-dark"></i>
+                        عدد مسائل التحدي (الهدف):
+                    </label>
+                    <div class="flex items-center justify-between gap-2 bg-white p-1.5 rounded-xl border border-slate-300 shadow-inner">
+                        <button type="button" onclick="adjustTargetProblems(-5)" aria-label="تقليل عدد المسائل" class="w-11 h-11 rounded-lg bg-slate-100 hover:bg-navy hover:text-gold active:scale-95 text-navy font-black text-xl transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-minus text-sm"></i>
+                        </button>
+                        <div class="flex-grow text-center">
+                            <span id="targetProbsDisplay" class="en-num text-xl font-black text-navy">10</span>
+                            <span class="text-xs font-extrabold text-slate-600 mr-1">مسائل</span>
+                        </div>
+                        <button type="button" onclick="adjustTargetProblems(5)" aria-label="زيادة عدد المسائل" class="w-11 h-11 rounded-lg bg-slate-100 hover:bg-navy hover:text-gold active:scale-95 text-navy font-black text-xl transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-plus text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. Digit Count (1, 2, or 3 digits) -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <label class="text-xs font-extrabold text-navy mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-hashtag text-teal"></i>
+                        عدد الأرقام (الخانات):
+                    </label>
+                    <div class="grid grid-cols-3 gap-1.5" id="digitsSelector">
+                        <button type="button" onclick="setDigits(1)" data-val="1" class="digit-btn py-2.5 px-2 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-navy text-gold border-navy shadow-sm">
+                            رقم واحد (<span class="en-num">1</span>)
+                        </button>
+                        <button type="button" onclick="setDigits(2)" data-val="2" class="digit-btn py-2.5 px-2 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-white text-slate-700 border-slate-300 hover:border-navy">
+                            رقمين (<span class="en-num">2</span>)
+                        </button>
+                        <button type="button" onclick="setDigits(3)" data-val="3" class="digit-btn py-2.5 px-2 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-white text-slate-700 border-slate-300 hover:border-navy">
+                            3 أرقام (<span class="en-num">3</span>)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. Main Level -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <label class="block text-xs font-extrabold text-navy mb-1.5">
+                        <i class="fa-solid fa-graduation-cap text-gold-dark ml-1"></i>
+                        المستوى المنهجي:
+                    </label>
+                    <select id="mainLevel" onchange="onMainLevelChange()" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-xs font-extrabold text-navy focus:ring-2 focus:ring-gold outline-none">
+                        <option value="level1" selected>المستوى الأول: الآحاد (0 - 9)</option>
+                        <option value="level2">المستوى الثاني: العشرات وأصدقاء 10 (0 - 99)</option>
+                        <option value="level3">المستوى الثالث: أصدقاء 50 والعداد الكامل</option>
+                    </select>
+                    <span id="ruleBadge" class="mt-2 inline-flex w-fit rounded-full bg-gold/20 px-2.5 py-1 text-[10px] font-extrabold text-navy"></span>
+                </div>
+
+                <!-- 6. Sub-Stage Rule -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <label class="block text-xs font-extrabold text-navy mb-1.5">
+                        <i class="fa-solid fa-chess-knight text-gold-dark ml-1"></i>
+                        المرحلة / القاعدة التدريبية:
+                    </label>
+                    <select id="stageLevel" onchange="onStageChange()" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-xs font-bold text-navy focus:ring-2 focus:ring-gold outline-none">
+                        <!-- Dynamic options -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Subtraction Toggle Option (Full width clean mobile row) -->
+            <div class="mt-3 bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                <span class="text-xs font-extrabold text-navy flex items-center gap-1.5">
+                    <i class="fa-solid fa-plus-minus text-red-500"></i>
+                    نوع العمليات الحسابية:
+                </span>
+                <div class="grid grid-cols-2 gap-2 w-full sm:w-auto sm:min-w-[290px]">
+                    <button type="button" id="subEnabledBtn" onclick="setSubtraction(true)" class="py-2.5 px-3 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-navy text-gold border-navy shadow-sm">
+                        جمع وطرح معاً
+                    </button>
+                    <button type="button" id="subDisabledBtn" onclick="setSubtraction(false)" class="py-2.5 px-3 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-white text-slate-700 border-slate-300 hover:border-navy">
+                        جمع فقط (بدون طرح)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pedagogical Hint Strip -->
+            <div id="ruleHintBox" class="mt-3 bg-gold/15 border border-gold/40 rounded-xl px-3.5 py-2 text-xs font-bold text-navy flex items-center gap-2">
+                <i class="fa-solid fa-lightbulb text-gold-dark"></i>
+                <span id="ruleHintText">جمع وطرح مباشر باستخدام الخرزات السفلية الأربعة فقط (0 إلى 4).</span>
+            </div>
+        </section>
+
+        <!-- Challenge Arena (Main Interactive Stage) -->
+        <section class="bg-white rounded-3xl shadow-xl border-2 border-navy/15 p-5 sm:p-8 flex-grow flex flex-col items-center justify-center relative overflow-hidden min-h-[370px]">
+            
+            <!-- Top Arena Progress Bar -->
+            <div id="progressContainer" class="hidden w-full max-w-md mb-4">
+                <div class="flex justify-between text-xs font-extrabold text-slate-500 mb-1.5">
+                    <span>العملية الحالية</span>
+                    <span class="en-num text-navy"><span id="currentStepNum">1</span> / <span id="totalStepsNum">4</span></span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                    <div id="progressBarFill" class="h-full bg-teal transition-all duration-200" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- STATE 1: Ready / Idle Screen -->
+            <div id="stateReady" class="text-center max-w-md mx-auto flex flex-col items-center gap-4 sm:gap-5">
+                <div class="w-20 h-20 rounded-3xl bg-navy text-gold flex items-center justify-center text-4xl shadow-lg border-4 border-gold">
+                    🧮
+                </div>
+                <div>
+                    <div class="inline-flex items-center gap-1.5 bg-navy/5 text-navy text-xs font-extrabold px-3 py-1 rounded-full mb-2">
+                        <span>تقدم الجلسة:</span>
+                        <span class="en-num text-teal font-black"><span id="sessionDoneCount">0</span> / <span id="sessionGoalHint">10</span></span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-black text-navy">هل أنت مستعد يا بطل؟</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 font-semibold mt-1 leading-relaxed">
+                        تخيّل المعداد في ذهنك، وتابع الأرقام التي ستظهر بسرعة
+                        <span class="en-num font-black text-teal" id="readySpeedHint">2</span> ثانية لكل رقم!
+                    </p>
+                </div>
+                <button onclick="startNewChallenge()" class="w-full sm:w-auto bg-gold hover:bg-gold-dark active:scale-95 text-navy font-black text-base sm:text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-3 border-2 border-navy/10">
+                    <i class="fa-solid fa-play"></i>
+                    <span>ابدأ التحدي الآن</span>
+                </button>
+            </div>
+
+            <!-- STATE 2: Flashing Numbers Stage -->
+            <div id="stateFlashing" class="hidden text-center flex flex-col items-center justify-center w-full my-auto">
+                <div id="flashStatusLabel" class="text-xs sm:text-sm font-extrabold text-teal bg-teal/10 px-4 py-1 rounded-full mb-4">
+                    استعد للتركيز...
+                </div>
+                <div id="flashCard" class="w-56 h-44 sm:w-72 sm:h-52 rounded-3xl bg-navy border-4 border-gold shadow-2xl flex items-center justify-center px-4">
+                    <span id="flashNumberDisplay" class="en-num text-6xl sm:text-8xl font-black text-gold tracking-tight">
+                        3
+                    </span>
+                </div>
+                <button onclick="cancelChallenge()" class="mt-6 text-xs font-bold text-slate-400 hover:text-red-500 transition flex items-center gap-1">
+                    <i class="fa-solid fa-stop-circle"></i>
+                    إيقاف الجولة
+                </button>
+            </div>
+
+            <!-- STATE 3: Answer Input & Interactive Numpad -->
+            <div id="stateAnswer" class="hidden w-full max-w-sm mx-auto flex flex-col items-center gap-4 animate-pop">
+                <div class="text-center">
+                    <span class="bg-gold/20 text-navy text-xs font-extrabold px-3 py-1 rounded-full">
+                        انتهى العرض! ما هو الناتج النهائي؟
+                    </span>
+                </div>
+
+                <!-- Answer Display Box -->
+                <div class="w-full relative">
+                    <input type="text" id="userAnswerInput" readonly placeholder="?" class="en-num w-full text-center text-4xl sm:text-5xl font-black text-navy bg-slate-50 border-4 border-navy rounded-2xl py-3 px-4 focus:outline-none shadow-inner">
+                </div>
+
+                <!-- Interactive Touch/Click Numpad -->
+                <div class="grid grid-cols-3 gap-2.5 w-full" dir="ltr">
+                    <button type="button" onclick="appendDigit('1')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">1</button>
+                    <button type="button" onclick="appendDigit('2')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">2</button>
+                    <button type="button" onclick="appendDigit('3')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">3</button>
+
+                    <button type="button" onclick="appendDigit('4')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">4</button>
+                    <button type="button" onclick="appendDigit('5')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">5</button>
+                    <button type="button" onclick="appendDigit('6')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">6</button>
+
+                    <button type="button" onclick="appendDigit('7')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">7</button>
+                    <button type="button" onclick="appendDigit('8')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">8</button>
+                    <button type="button" onclick="appendDigit('9')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">9</button>
+
+                    <button type="button" onclick="clearAnswer()" class="bg-red-50 hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white active:scale-95 text-red-600 font-extrabold text-sm py-4 rounded-2xl border border-red-200 shadow-sm transition">
+                        مسح الكل
+                    </button>
+                    <button type="button" onclick="appendDigit('0')" class="en-num bg-slate-100 hover:bg-navy hover:text-white active:bg-navy active:text-gold active:scale-95 text-navy font-black text-2xl sm:text-3xl py-4 rounded-2xl border border-slate-300 shadow-sm transition">0</button>
+                    <button type="button" onclick="backspaceAnswer()" class="bg-amber-50 hover:bg-amber-500 hover:text-white active:bg-amber-500 active:text-white active:scale-95 text-amber-700 font-extrabold text-lg py-4 rounded-2xl border border-amber-200 shadow-sm transition" title="حذف رقم">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </button>
+                </div>
+
+                <!-- Auto-check indicator -->
+                <div class="text-xs font-bold text-slate-500 flex items-center gap-1.5 mt-1">
+                    <i class="fa-solid fa-bolt text-gold-dark"></i>
+                    <span>يتم التقييم تلقائياً فور اكتمال خانات الإجابة</span>
+                </div>
+            </div>
+
+            <!-- STATE 4: Result & Post-Answer Actions -->
+            <div id="stateResult" class="hidden w-full max-w-lg mx-auto text-center flex flex-col items-center gap-5 animate-pop">
+                <div id="resultIconBadge" class="w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg">
+                    <!-- Dynamic check or cross -->
+                </div>
+
+                <div>
+                    <h3 id="resultHeadline" class="text-2xl sm:text-3xl font-black">
+                        أشطر عبقري! 🎉
+                    </h3>
+                    <p id="resultSubtext" class="text-sm font-bold text-slate-600 mt-1">
+                        إجابة صحيحة وممتازة!
+                    </p>
+                </div>
+
+                <!-- Answer Comparison & Steps Breakdown -->
+                <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-3">
+                    <div class="grid grid-cols-2 gap-3 text-center">
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="block text-[11px] font-bold text-slate-500">إجابتك</span>
+                            <span id="summaryUserAns" class="en-num text-2xl font-black text-navy">0</span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="block text-[11px] font-bold text-slate-500">الإجابة الصحيحة</span>
+                            <span id="summaryCorrectAns" class="en-num text-2xl font-black text-teal">0</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-200 pt-2.5">
+                        <span class="block text-[11px] font-bold text-slate-500 mb-1.5">تسلسل المسألة:</span>
+                        <div id="summaryStepsList" class="flex flex-wrap items-center justify-center gap-1.5" dir="ltr">
+                            <!-- Problem steps chips -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Problem OR Replay Same Problem -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full">
+                    <button type="button" onclick="replaySameChallenge()" class="bg-white hover:bg-slate-100 text-navy border-2 border-navy font-extrabold text-xs sm:text-sm py-3.5 px-3 rounded-2xl shadow-sm transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-rotate-right text-gold-dark"></i>
+                        <span>إعادة المسألة</span>
+                    </button>
+                    <button type="button" onclick="openCertificateModal()" class="bg-gold/20 hover:bg-gold/30 text-navy border-2 border-gold font-extrabold text-xs sm:text-sm py-3.5 px-3 rounded-2xl shadow-sm transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-award text-gold-dark"></i>
+                        <span>بطاقة الإنجاز</span>
+                    </button>
+                    <button type="button" onclick="startNewChallenge()" class="bg-navy hover:bg-navy-light text-gold font-black text-xs sm:text-sm py-3.5 px-3 rounded-2xl shadow-lg transition flex items-center justify-center gap-1.5">
+                        <span>المسألة التالية</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Hero Achievement Certificate Modal -->
+    <div id="certificateModal" class="fixed inset-0 z-50 hidden bg-navy/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div id="certificatePrintable" class="bg-white w-full max-w-lg rounded-3xl border-4 border-gold shadow-2xl overflow-hidden relative animate-pop">
+            <!-- Top Decorative Header -->
+            <div class="bg-navy text-white p-5 text-center border-b-4 border-gold relative">
+                <button onclick="closeCertificateModal()" class="no-print-cert absolute top-4 left-4 w-8 h-8 rounded-full bg-white/10 hover:bg-red-500 text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-gold text-navy flex items-center justify-center text-3xl shadow-md mb-2">
+                    🏆
+                </div>
+                <h2 class="text-xl font-black text-gold">شهادة بطل الحساب الذهني</h2>
+                <p class="text-xs text-slate-300 font-bold mt-0.5">منصة عبقري للحساب الذهني والسوروبان (abqary.online)</p>
+            </div>
+
+            <!-- Certificate Body -->
+            <div class="p-6 text-center flex flex-col gap-4 bg-gradient-to-b from-white to-slate-50">
+                <div>
+                    <p class="text-xs font-bold text-slate-500">تُمنح هذه البطاقة التقديرية للبطل العبقري:</p>
+                    <h3 id="certHeroName" class="text-2xl sm:text-3xl font-black text-navy mt-1 border-b-2 border-dashed border-gold inline-block px-6 pb-1">
+                        بطل منصة عبقري
+                    </h3>
+                </div>
+
+                <p class="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed">
+                    لأدائه المتميز وسرعة بديهته في اجتياز تدريبات التخيل الذهني السريع ضمن
+                    <span id="certLevelLabel" class="text-teal font-black">المستوى الأول</span>.
+                </p>
+
+                <!-- Certificate Stats Grid -->
+                <div class="grid grid-cols-3 gap-2.5 my-1">
+                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="block text-[11px] font-bold text-slate-500">إجابات صحيحة</span>
+                        <span id="certCorrect" class="en-num text-xl font-black text-teal">0</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="block text-[11px] font-bold text-slate-500">مجموع النقاط</span>
+                        <span id="certScore" class="en-num text-xl font-black text-navy">0</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="block text-[11px] font-bold text-slate-500">نسبة الإتقان</span>
+                        <span id="certAccuracy" class="en-num text-xl font-black text-gold-dark">0%</span>
+                    </div>
+                </div>
+
+                <!-- Supervisor Signature & Contact -->
+                <div class="border-t border-slate-200 pt-3 flex flex-wrap justify-between items-center text-xs gap-2">
+                    <div class="text-right">
+                        <span class="block text-[10px] text-slate-400 font-bold">إشراف واعتماد</span>
+                        <span class="font-black text-navy">مستر عبدالرحمن منصور</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="block text-[10px] text-slate-400 font-bold">للتواصل والاستفسار</span>
+                        <span class="en-num font-black text-teal" dir="ltr">01007673634</span>
+                    </div>
+                </div>
+
+                <!-- Modal Action Buttons -->
+                <div class="no-print-cert grid grid-cols-2 gap-2.5 mt-2">
+                    <button onclick="window.print()" class="bg-navy hover:bg-navy-light text-gold font-extrabold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow transition">
+                        <i class="fa-solid fa-print"></i>
+                        <span>طباعة / حفظ PDF</span>
+                    </button>
+                    <button onclick="closeCertificateModal()" class="bg-slate-200 hover:bg-slate-300 text-navy font-extrabold py-2.5 px-4 rounded-xl text-xs transition">
+                        متابعة التحدي
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-4 px-4 border-t-2 border-gold text-xs font-bold mt-6">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-right">
+            <div>
+                جميع الحقوق محفوظة © <span class="text-gold">منصة عبقري للحساب الذهني والسوروبان</span> — تطوير وتنفيذ: عبدالرحمن منصور
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="https://abqary.online" target="_blank" rel="noopener noreferrer" class="text-gold hover:underline en-num">
+                    abqary.online
+                </a>
+                <span class="text-slate-500">|</span>
+                <a href="https://wa.me/201007673634" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1 rounded-lg flex items-center gap-1.5 transition en-num" dir="ltr">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>01007673634</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- State Variables ---
+        let speedSeconds = 2;
+        let digitCount = 1;
+        let operationsCount = 4;
+        let targetProblemsCount = 10;
+        let allowSubtraction = true;
+        let soundEnabled = true;
+
+        let stats = {
+            correct: 0,
+            wrong: 0,
+            score: 0,
+            streak: 0,
+            bestStreak: 0
+        };
+
+        let currentProblem = {
+            numbers: [],
+            sum: 0
+        };
+
+        let activeTimers = [];
+        let currentPhase = 'ready'; // 'ready' | 'flashing' | 'answer' | 'result'
+
+        // --- Web Audio API Synthesizer (No external sound URLs needed) ---
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playTickSound(isCountdown = false) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(isCountdown ? 520 : 780, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.09);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.09);
+            } catch (e) {}
+        }
+
+        function playSuccessSound() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    const startTime = audioCtx.currentTime + idx * 0.09;
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    gain.gain.setValueAtTime(0.18, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.28);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.28);
+                });
+            } catch (e) {}
+        }
+
+        function playErrorSound() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const freqs = [240, 175];
+                freqs.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    const startTime = audioCtx.currentTime + idx * 0.16;
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    gain.gain.setValueAtTime(0.15, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.25);
+                });
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            const label = document.getElementById('soundLabel');
+            if (soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high';
+                label.innerText = 'الصوت مفعل';
+                playTickSound(false);
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-red-400';
+                label.innerText = 'الصوت مكتوم';
+            }
+        }
+
+        function showToast(msg) {
+            const box = document.getElementById('toastBox');
+            document.getElementById('toastMessage').innerText = msg;
+            box.classList.remove('hidden');
+            setTimeout(() => box.classList.add('hidden'), 2600);
+        }
+
+        // --- Curriculum Definition (Matches Abqary Platform Syllabus) ---
+        const CURRICULUM = {
+            level1: {
+                badge: "المستوى الأول",
+                defaultDigits: 1,
+                stages: [
+                    {
+                        id: "l1_lower_only",
+                        name: "1. الخرزات السفلية فقط (0 إلى 4)",
+                        hint: "جمع وطرح مباشر باستخدام الخرزات السفلية الأربعة فقط بدون الخرزة الخماسية."
+                    },
+                    {
+                        id: "l1_plus_five",
+                        name: "2. إضافة الخمسة العلوية (+5 / -5)",
+                        hint: "الجمع والطرح المباشر مع تفعيل الخرزة الخماسية العلوية صراحةً (5)."
+                    },
+                    {
+                        id: "l1_direct_all",
+                        name: "3. جمع وطرح مباشر كامل (0 إلى 9)",
+                        hint: "مسائل مباشرة شاملة للآحاد من 0 إلى 9 دون الحاجة لقواعد أصدقاء الخمسة."
+                    },
+                    {
+                        id: "l1_friends_5",
+                        name: "4. أصدقاء العدد 5 (مكملات الخمسة)",
+                        hint: "تطبيق قواعد أصدقاء الخمسة: (+4=+5-1، +3=+5-2، +2=+5-3، +1=+5-4) وعكسها في الطرح."
+                    }
+                ]
+            },
+            level2: {
+                badge: "المستوى الثاني",
+                defaultDigits: 2,
+                stages: [
+                    {
+                        id: "l2_tens_lower",
+                        name: "1. مباشر العشرات السفلية (0 إلى 44)",
+                        hint: "عمودا الآحاد والعشرات بالخرزات السفلية فقط (مثل 22 و 11) والناتج من 0 إلى 44."
+                    },
+                    {
+                        id: "l2_tens_direct_99",
+                        name: "2. إضافة الـ 50 والـ 5 - مباشر كامل (0 إلى 99)",
+                        hint: "تفعيل الخرزة الخماسية في العشرات (50) والآحاد (5) للجمع والطرح المباشر من 0 إلى 99."
+                    },
+                    {
+                        id: "l2_friends_10",
+                        name: "3. أصدقاء العدد 10 (1-9، 2-8، 3-7، 4-6، 5-5)",
+                        hint: "مكملات العشرة: (1 و9)، (2 و8)، (3 و7)، (4 و6)، (5 و5) للجمع (+10 - الصديق) والطرح (-10 + الصديق)."
+                    }
+                ]
+            },
+            level3: {
+                badge: "المستوى الثالث",
+                defaultDigits: 2,
+                stages: [
+                    {
+                        id: "l3_friends_50",
+                        name: "1. أصدقاء العدد 50 (30-20، 40-10، 50)",
+                        hint: "تطبيق مكملات الخمسين في عمود العشرات: (+40=+50-10، +30=+50-20، +20=+50-30، +10=+50-40)."
+                    },
+                    {
+                        id: "l3_full_abacus",
+                        name: "2. العداد الكامل (تطبيق شامل متقدم)",
+                        hint: "دمج جميع القواعد (مباشر + أصدقاء 5 + أصدقاء 10 + أصدقاء 50) على العداد الكامل."
+                    }
+                ]
+            }
+        };
+
+        // --- Settings Handlers ---
+        function setSpeed(val) {
+            speedSeconds = Math.max(1, Math.min(20, parseInt(val) || 1));
+            document.getElementById('speedDisplay').innerText = speedSeconds;
+            document.getElementById('readySpeedHint').innerText = speedSeconds;
+        }
+
+        function adjustSpeed(delta) {
+            playTickSound(true);
+            setSpeed(speedSeconds + delta);
+        }
+
+        function setDigits(d) {
+            digitCount = d;
+            document.querySelectorAll('.digit-btn').forEach(btn => {
+                const val = parseInt(btn.getAttribute('data-val'));
+                if (val === d) {
+                    btn.className = "digit-btn py-2.5 px-2 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-navy text-gold border-navy shadow-sm";
+                } else {
+                    btn.className = "digit-btn py-2.5 px-2 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-white text-slate-700 border-slate-300 hover:border-navy";
+                }
+            });
+        }
+
+        function setOps(val) {
+            operationsCount = Math.max(2, Math.min(20, parseInt(val) || 4));
+            document.getElementById('opsDisplay').innerText = operationsCount;
+        }
+
+        function adjustOps(delta) {
+            playTickSound(true);
+            setOps(operationsCount + delta);
+        }
+
+        function setTargetProblems(val) {
+            targetProblemsCount = Math.max(5, Math.min(50, parseInt(val) || 10));
+            document.getElementById('targetProbsDisplay').innerText = targetProblemsCount;
+            document.getElementById('sessionGoalHint').innerText = targetProblemsCount;
+        }
+
+        function adjustTargetProblems(delta) {
+            playTickSound(true);
+            setTargetProblems(targetProblemsCount + delta);
+        }
+
+        function setSubtraction(enabled) {
+            allowSubtraction = enabled;
+            const enBtn = document.getElementById('subEnabledBtn');
+            const disBtn = document.getElementById('subDisabledBtn');
+            if (enabled) {
+                enBtn.className = "py-2.5 px-3 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-navy text-gold border-navy shadow-sm";
+                disBtn.className = "py-2.5 px-3 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-white text-slate-700 border-slate-300 hover:border-navy";
+            } else {
+                disBtn.className = "py-2.5 px-3 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-teal text-white border-teal shadow-sm";
+                enBtn.className = "py-2.5 px-3 rounded-lg text-xs font-extrabold border transition active:scale-95 bg-white text-slate-700 border-slate-300 hover:border-navy";
+            }
+        }
+
+        function onMainLevelChange() {
+            const mainLevel = document.getElementById('mainLevel').value;
+            const stageSelect = document.getElementById('stageLevel');
+            const levelInfo = CURRICULUM[mainLevel];
+
+            const ruleBadge = document.getElementById('ruleBadge');
+            if (ruleBadge) ruleBadge.innerText = levelInfo.badge;
+            setDigits(levelInfo.defaultDigits);
+
+            stageSelect.innerHTML = levelInfo.stages.map((st, idx) =>
+                `<option value="${st.id}" ${idx === 0 ? 'selected' : ''}>${st.name}</option>`
+            ).join('');
+
+            onStageChange();
+        }
+
+        function onStageChange() {
+            const mainLevel = document.getElementById('mainLevel').value;
+            const stageId = document.getElementById('stageLevel').value;
+            const stageObj = CURRICULUM[mainLevel].stages.find(s => s.id === stageId);
+            if (stageObj) {
+                document.getElementById('ruleHintText').innerText = stageObj.hint;
+            }
+            if (stageId === 'l3_full_abacus' && digitCount < 2) {
+                setDigits(3);
+            }
+        }
+
+        // --- Soroban Validation & Problem Generator ---
+        function canDigitMoveDirect(curDigit, delta) {
+            let nextDigit = curDigit + delta;
+            if (nextDigit < 0 || nextDigit > 9) return false;
+            let curU = curDigit >= 5 ? 5 : 0;
+            let curL = curDigit % 5;
+            if (delta > 0) {
+                let dU = delta >= 5 ? 5 : 0;
+                let dL = delta % 5;
+                if (dU === 5 && curU === 5) return false;
+                if (curL + dL > 4) return false;
+            } else if (delta < 0) {
+                let sub = Math.abs(delta);
+                let sU = sub >= 5 ? 5 : 0;
+                let sL = sub % 5;
+                if (sU === 5 && curU === 0) return false;
+                if (curL < sL) return false;
+            }
+            return true;
+        }
+
+        function canDigitMoveFriend5(curDigit, delta) {
+            let nextDigit = curDigit + delta;
+            if (nextDigit < 0 || nextDigit > 9) return false;
+            if (canDigitMoveDirect(curDigit, delta)) return true;
+
+            let absD = Math.abs(delta);
+            if (absD >= 1 && absD <= 4) {
+                let curU = curDigit >= 5 ? 5 : 0;
+                let curL = curDigit % 5;
+                let friend = 5 - absD;
+                if (delta > 0) {
+                    return (curU === 0 && curL >= friend);
+                } else {
+                    return (curU === 5 && curL + friend <= 4);
+                }
+            }
+            return false;
+        }
+
+        function isMoveValid(currentSum, nextVal, stage) {
+            if (!allowSubtraction && nextVal < 0) return false;
+            let newSum = currentSum + nextVal;
+            if (newSum === currentSum || newSum < 0) return false;
+
+            // Level 1 checks
+            if (stage === 'l1_lower_only') {
+                if (digitCount === 1 && newSum > 4) return false;
+                return checkAllDigitsDirect(currentSum, nextVal, 4);
+            }
+            if (stage === 'l1_plus_five' || stage === 'l1_direct_all') {
+                if (digitCount === 1 && newSum > 9) return false;
+                return checkAllDigitsDirect(currentSum, nextVal, 9);
+            }
+            if (stage === 'l1_friends_5') {
+                if (digitCount === 1 && newSum > 9) return false;
+                return checkAllDigitsFriend5(currentSum, nextVal);
+            }
+
+            // Level 2 checks
+            if (stage === 'l2_tens_lower') {
+                if (digitCount <= 2 && newSum > 44) return false;
+                return checkAllDigitsDirect(currentSum, nextVal, 4);
+            }
+            if (stage === 'l2_tens_direct_99') {
+                if (digitCount <= 2 && newSum > 99) return false;
+                return checkAllDigitsDirect(currentSum, nextVal, 9);
+            }
+            if (stage === 'l2_friends_10') {
+                if (digitCount <= 2 && newSum > 99) return false;
+                if (digitCount === 3 && newSum > 999) return false;
+                let curT = Math.floor((currentSum % 100) / 10), curO = currentSum % 10;
+                let absV = Math.abs(nextVal);
+                let stepT = Math.floor((absV % 100) / 10);
+                let stepO = absV % 10;
+
+                if (nextVal > 0) {
+                    if (curO + stepO <= 9) {
+                        return canDigitMoveDirect(curT, stepT) && canDigitMoveDirect(curO, stepO);
+                    } else {
+                        let friend10 = 10 - stepO;
+                        return canDigitMoveDirect(curO, -friend10) && canDigitMoveDirect(curT, stepT + 1);
+                    }
+                } else {
+                    if (curO >= stepO) {
+                        return canDigitMoveDirect(curT, -stepT) && canDigitMoveDirect(curO, -stepO);
+                    } else {
+                        let friend10 = 10 - stepO;
+                        return canDigitMoveDirect(curO, friend10) && canDigitMoveDirect(curT, -(stepT + 1));
+                    }
+                }
+            }
+
+            // Level 3 checks
+            if (stage === 'l3_friends_50') {
+                if (digitCount <= 2 && newSum > 99) return false;
+                if (digitCount === 3 && newSum > 999) return false;
+                let curT = Math.floor((currentSum % 100) / 10), curO = currentSum % 10;
+                let absV = Math.abs(nextVal);
+                let stepT = Math.floor((absV % 100) / 10);
+                let stepO = absV % 10;
+
+                if (nextVal > 0) {
+                    if (curO + stepO > 9) return false;
+                    return canDigitMoveDirect(curO, stepO) && canDigitMoveFriend5(curT, stepT);
+                } else {
+                    if (curO < stepO) return false;
+                    return canDigitMoveDirect(curO, -stepO) && canDigitMoveFriend5(curT, -stepT);
+                }
+            }
+
+            if (stage === 'l3_full_abacus') {
+                return newSum >= 0 && newSum <= 9999;
+            }
+
+            return false;
+        }
+
+        function checkAllDigitsDirect(currentSum, nextVal, maxDigitVal) {
+            let absV = Math.abs(nextVal);
+            let sign = nextVal >= 0 ? 1 : -1;
+            for (let p = 0; p < 3; p++) {
+                let div = Math.pow(10, p);
+                let curD = Math.floor(currentSum / div) % 10;
+                let stepD = (Math.floor(absV / div) % 10) * sign;
+                if (curD + stepD > maxDigitVal || curD + stepD < 0) return false;
+                if (!canDigitMoveDirect(curD, stepD)) return false;
+            }
+            return true;
+        }
+
+        function checkAllDigitsFriend5(currentSum, nextVal) {
+            let absV = Math.abs(nextVal);
+            let sign = nextVal >= 0 ? 1 : -1;
+            for (let p = 0; p < 3; p++) {
+                let div = Math.pow(10, p);
+                let curD = Math.floor(currentSum / div) % 10;
+                let stepD = (Math.floor(absV / div) % 10) * sign;
+                if (!canDigitMoveFriend5(curD, stepD)) return false;
+            }
+            return true;
+        }
+
+        function buildCandidatesPool(stage) {
+            let minVal = digitCount === 1 ? 1 : (digitCount === 2 ? 10 : 100);
+            let maxVal = digitCount === 1 ? 9 : (digitCount === 2 ? 99 : 999);
+
+            if (stage === 'l1_lower_only' || stage === 'l2_tens_lower') {
+                maxVal = digitCount === 1 ? 4 : (digitCount === 2 ? 44 : 444);
+            }
+
+            let pool = [];
+            for (let v = minVal; v <= maxVal; v++) {
+                if (stage === 'l1_lower_only' || stage === 'l2_tens_lower') {
+                    // استبعاد أي رقم يحتوي على 5..9 في أي خانة
+                    if (String(v).split('').some(ch => parseInt(ch) > 4)) continue;
+                }
+                pool.push(v);
+                if (allowSubtraction) pool.push(-v);
+            }
+
+            // تعزيز ظهور أصدقاء الـ 50 في مرحلتهم
+            if (stage === 'l3_friends_50' && digitCount >= 2) {
+                [10, 20, 30, 40, 50].forEach(t => {
+                    pool.push(t, t);
+                    if (allowSubtraction) pool.push(-t, -t);
+                });
+            }
+
+            return pool.length > 0 ? pool : [1, 2, 3, 4];
+        }
+
+        function generateChallengeSequence() {
+            const stage = document.getElementById('stageLevel').value;
+            let candidates = buildCandidatesPool(stage);
+            let bestProblem = null;
+
+            for (let retry = 0; retry < 40; retry++) {
+                let seq = [];
+                let sum = 0;
+                let attempts = 0;
+
+                while (seq.length < operationsCount && attempts < 600) {
+                    attempts++;
+                    let valid = candidates.filter(c => {
+                        if (seq.length === 0 && c < 0) return false;
+                        return isMoveValid(sum, c, stage);
+                    });
+
+                    if (valid.length === 0) break;
+
+                    // تفضيل الحركات التي تطبق القاعدة المستهدفة
+                    let chosen;
+                    if (stage === 'l1_friends_5' || stage === 'l2_friends_10' || stage === 'l3_friends_50') {
+                        let ruleMoves = valid.filter(c => !checkAllDigitsDirect(sum, c, 9));
+                        if (ruleMoves.length > 0 && Math.random() < 0.7) {
+                            chosen = ruleMoves[Math.floor(Math.random() * ruleMoves.length)];
+                        } else {
+                            chosen = valid[Math.floor(Math.random() * valid.length)];
+                        }
+                    } else {
+                        chosen = valid[Math.floor(Math.random() * valid.length)];
+                    }
+
+                    seq.push(chosen);
+                    sum += chosen;
+                }
+
+                if (seq.length === operationsCount) {
+                    bestProblem = { numbers: seq, sum: sum };
+                    break;
+                }
+                if (!bestProblem || seq.length > bestProblem.numbers.length) {
+                    bestProblem = { numbers: seq, sum: sum };
+                }
+            }
+
+            // مسار احتياطي مضمون 100% إذا كانت الإعدادات مقيدة جداً (مثل جمع فقط في نطاق ضيق)
+            if (!bestProblem || bestProblem.numbers.length < 2) {
+                let base = digitCount === 1 ? 1 : (digitCount === 2 ? 11 : 111);
+                let fallbackSeq = [];
+                let s = 0;
+                for (let i = 0; i < operationsCount; i++) {
+                    if (allowSubtraction && s >= base * 2 && i % 2 === 1) {
+                        fallbackSeq.push(-base);
+                        s -= base;
+                    } else {
+                        fallbackSeq.push(base);
+                        s += base;
+                    }
+                }
+                bestProblem = { numbers: fallbackSeq, sum: s };
+            }
+
+            return bestProblem;
+        }
+
+        // --- Challenge Lifecycle & Visual Flashing ---
+        function clearAllTimers() {
+            activeTimers.forEach(t => clearTimeout(t));
+            activeTimers = [];
+        }
+
+        function switchArenaState(state) {
+            currentPhase = state;
+            document.getElementById('stateReady').classList.add('hidden');
+            document.getElementById('stateFlashing').classList.add('hidden');
+            document.getElementById('stateAnswer').classList.add('hidden');
+            document.getElementById('stateResult').classList.add('hidden');
+            document.getElementById('progressContainer').classList.add('hidden');
+
+            if (state === 'ready') {
+                document.getElementById('stateReady').classList.remove('hidden');
+            } else if (state === 'flashing') {
+                document.getElementById('stateFlashing').classList.remove('hidden');
+                document.getElementById('progressContainer').classList.remove('hidden');
+            } else if (state === 'answer') {
+                document.getElementById('stateAnswer').classList.remove('hidden');
+            } else if (state === 'result') {
+                document.getElementById('stateResult').classList.remove('hidden');
+            }
+        }
+
+        function startNewChallenge() {
+            initAudio();
+            currentProblem = generateChallengeSequence();
+            runFlashingSequence();
+        }
+
+        function replaySameChallenge() {
+            initAudio();
+            if (!currentProblem.numbers || currentProblem.numbers.length === 0) {
+                startNewChallenge();
+                return;
+            }
+            runFlashingSequence();
+        }
+
+        function cancelChallenge() {
+            clearAllTimers();
+            switchArenaState('ready');
+        }
+
+        function runFlashingSequence() {
+            clearAllTimers();
+            switchArenaState('flashing');
+
+            const nums = currentProblem.numbers;
+            const total = nums.length;
+            const displayEl = document.getElementById('flashNumberDisplay');
+            const statusLabel = document.getElementById('flashStatusLabel');
+            const flashCard = document.getElementById('flashCard');
+            const stepNumEl = document.getElementById('currentStepNum');
+            const totalStepsEl = document.getElementById('totalStepsNum');
+            const progressFill = document.getElementById('progressBarFill');
+
+            totalStepsEl.innerText = total;
+            stepNumEl.innerText = '0';
+            progressFill.style.width = '0%';
+
+            // عد تنازلي سريع (استعد)
+            statusLabel.innerText = 'استعد للتركيز...';
+            flashCard.className = 'w-56 h-44 sm:w-72 sm:h-52 rounded-3xl bg-navy border-4 border-gold shadow-2xl flex items-center justify-center px-4';
+            displayEl.className = 'en-num text-5xl sm:text-6xl font-black text-white';
+            displayEl.innerText = 'GO!';
+            playTickSound(true);
+
+            const startDelay = 750;
+            const intervalMs = speedSeconds * 1000;
+            // فاصل وميض قصير بين الأرقام لتمييز الأرقام المتكررة
+            const gapMs = Math.min(140, Math.floor(intervalMs * 0.15));
+
+            nums.forEach((num, idx) => {
+                const showTime = startDelay + idx * intervalMs;
+
+                // إظهار الرقم
+                const tShow = setTimeout(() => {
+                    statusLabel.innerText = `العملية ${idx + 1} من ${total}`;
+                    stepNumEl.innerText = idx + 1;
+                    progressFill.style.width = `${((idx + 1) / total) * 100}%`;
+
+                    const isNeg = num < 0;
+                    const formatted = isNeg ? `-${Math.abs(num)}` : `${num}`;
+
+                    flashCard.className = isNeg
+                        ? 'w-56 h-44 sm:w-72 sm:h-52 rounded-3xl bg-navy border-4 border-red-500 shadow-2xl flex items-center justify-center px-4 animate-pop'
+                        : 'w-56 h-44 sm:w-72 sm:h-52 rounded-3xl bg-navy border-4 border-gold shadow-2xl flex items-center justify-center px-4 animate-pop';
+
+                    displayEl.className = isNeg
+                        ? 'en-num text-6xl sm:text-8xl font-black text-red-400 tracking-tight'
+                        : 'en-num text-6xl sm:text-8xl font-black text-gold tracking-tight';
+
+                    displayEl.innerText = formatted;
+                    playTickSound(false);
+                }, showTime);
+                activeTimers.push(tShow);
+
+                // وميض فاصل قبل الرقم التالي
+                if (idx < total - 1) {
+                    const tBlank = setTimeout(() => {
+                        displayEl.innerText = '';
+                    }, showTime + intervalMs - gapMs);
+                    activeTimers.push(tBlank);
+                }
+            });
+
+            // الانتقال لشاشة الإجابة بعد انتهاء آخر رقم
+            const endTime = startDelay + total * intervalMs;
+            const tEnd = setTimeout(() => {
+                clearAnswer();
+                switchArenaState('answer');
+            }, endTime);
+            activeTimers.push(tEnd);
+        }
+
+        // --- Numpad & Auto-Check Answer Logic ---
+        function appendDigit(digit) {
+            if (currentPhase !== 'answer') return;
+            const inputEl = document.getElementById('userAnswerInput');
+            const correctStr = String(currentProblem.sum);
+
+            if (inputEl.value.length >= correctStr.length) return;
+            inputEl.value += digit;
+            playTickSound(false);
+
+            // التقييم التلقائي الفوري بمجرد اكتمال عدد خانات الإجابة
+            if (inputEl.value.length === correctStr.length) {
+                setTimeout(() => {
+                    submitAnswer();
+                }, 120);
+            }
+        }
+
+        function backspaceAnswer() {
+            if (currentPhase !== 'answer') return;
+            const inputEl = document.getElementById('userAnswerInput');
+            inputEl.value = inputEl.value.slice(0, -1);
+            playTickSound(true);
+        }
+
+        function clearAnswer() {
+            const inputEl = document.getElementById('userAnswerInput');
+            if (inputEl) inputEl.value = '';
+        }
+
+        function submitAnswer() {
+            if (currentPhase !== 'answer') return;
+            const inputEl = document.getElementById('userAnswerInput');
+            if (!inputEl.value) return;
+
+            const userVal = parseInt(inputEl.value, 10);
+            const correctVal = currentProblem.sum;
+            const isCorrect = (userVal === correctVal);
+
+            // تحديث الإحصائيات والنقاط وسلسلة الانتصارات
+            if (isCorrect) {
+                stats.correct++;
+                stats.streak++;
+                if (stats.streak > stats.bestStreak) stats.bestStreak = stats.streak;
+                const earnedPoints = (operationsCount * digitCount * 5) + (stats.streak >= 3 ? 15 : 0);
+                stats.score += earnedPoints;
+                playSuccessSound();
+                if (stats.correct === targetProblemsCount) {
+                    showToast(`🏆 مبروك! أتممت هدف الجلسة (${targetProblemsCount} مسائل)!`);
+                } else if (stats.streak === 3 || stats.streak === 5 || stats.streak % 5 === 0) {
+                    showToast(`🔥 رائع! سلسلة ${stats.streak} إجابات صحيحة متتالية!`);
+                }
+            } else {
+                stats.wrong++;
+                stats.streak = 0;
+                playErrorSound();
+            }
+            updateStatsUI();
+
+            // عرض النتيجة
+            const iconBadge = document.getElementById('resultIconBadge');
+            const headline = document.getElementById('resultHeadline');
+            const subtext = document.getElementById('resultSubtext');
+
+            if (isCorrect) {
+                iconBadge.className = 'w-20 h-20 rounded-full bg-teal text-white flex items-center justify-center text-4xl shadow-lg animate-celebrate';
+                iconBadge.innerHTML = '<i class="fa-solid fa-trophy"></i>';
+                headline.className = 'text-2xl sm:text-3xl font-black text-teal';
+                headline.innerText = 'أشطر عبقري! 🎉';
+                subtext.innerText = stats.streak >= 3
+                    ? `إجابة صحيحة! سلسلة انتصارات متتالية (${stats.streak} 🔥)`
+                    : 'إجابة صحيحة وسرعة مذهلة، استمر يا بطل!';
+            } else {
+                iconBadge.className = 'w-20 h-20 rounded-full bg-red-600 text-white flex items-center justify-center text-4xl shadow-lg';
+                iconBadge.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                headline.className = 'text-2xl sm:text-3xl font-black text-red-600';
+                headline.innerText = 'حاول مرة أخرى يا بطل!';
+                subtext.innerText = 'راجع تسلسل المسألة بالأسفل وجرب إعادة المسألة أو الانتقال للتالية.';
+            }
+
+            document.getElementById('summaryUserAns').innerText = userVal;
+            document.getElementById('summaryUserAns').className = isCorrect
+                ? 'en-num text-2xl font-black text-teal'
+                : 'en-num text-2xl font-black text-red-600';
+
+            document.getElementById('summaryCorrectAns').innerText = correctVal;
+
+            // عرض خطوات المسألة للمراجعة
+            const stepsContainer = document.getElementById('summaryStepsList');
+            stepsContainer.innerHTML = currentProblem.numbers.map(n => {
+                const isNeg = n < 0;
+                const txt = isNeg ? `-${Math.abs(n)}` : `${n}`;
+                const cls = isNeg
+                    ? 'en-num px-2.5 py-1 rounded-lg bg-red-50 text-red-600 border border-red-200 font-extrabold text-xs'
+                    : 'en-num px-2.5 py-1 rounded-lg bg-white text-navy border border-slate-300 font-extrabold text-xs';
+                return `<span class="${cls}">${txt}</span>`;
+            }).join('') + `<span class="en-num px-2.5 py-1 rounded-lg bg-navy text-gold font-black text-xs">= ${correctVal}</span>`;
+
+            switchArenaState('result');
+        }
+
+        function updateStatsUI() {
+            document.getElementById('correctCount').innerText = stats.correct;
+            document.getElementById('wrongCount').innerText = stats.wrong;
+            document.getElementById('scorePoints').innerText = stats.score;
+            document.getElementById('streakCount').innerText = stats.streak;
+            const doneEl = document.getElementById('sessionDoneCount');
+            if (doneEl) doneEl.innerText = stats.correct + stats.wrong;
+
+            const streakCard = document.getElementById('streakCard');
+            if (stats.streak >= 3) {
+                streakCard.classList.add('ring-2', 'ring-orange-400', 'bg-orange-50/40');
+            } else {
+                streakCard.classList.remove('ring-2', 'ring-orange-400', 'bg-orange-50/40');
+            }
+        }
+
+        function resetStats() {
+            stats.correct = 0;
+            stats.wrong = 0;
+            stats.score = 0;
+            stats.streak = 0;
+            stats.bestStreak = 0;
+            updateStatsUI();
+            showToast('تم تصفير الإحصائيات والنقاط بنجاح!');
+        }
+
+        // --- Hero Name & Certificate Modal ---
+        function saveHeroName(val) {
+            try {
+                localStorage.setItem('abqary_hero_name', val);
+            } catch (e) {}
+        }
+
+        function loadHeroName() {
+            try {
+                const saved = localStorage.getItem('abqary_hero_name');
+                if (saved) {
+                    document.getElementById('heroNameInput').value = saved;
+                }
+            } catch (e) {}
+        }
+
+        function openCertificateModal() {
+            const rawName = document.getElementById('heroNameInput').value.trim();
+            const heroName = rawName || 'بطل منصة عبقري';
+            const mainLevel = document.getElementById('mainLevel').value;
+            const stageSelect = document.getElementById('stageLevel');
+            const stageName = stageSelect.options[stageSelect.selectedIndex]?.text || '';
+            const levelText = `${CURRICULUM[mainLevel].badge} (${stageName})`;
+
+            const total = stats.correct + stats.wrong;
+            const pct = total === 0 ? 100 : Math.round((stats.correct / total) * 100);
+
+            document.getElementById('certHeroName').innerText = heroName;
+            document.getElementById('certLevelLabel').innerText = levelText;
+            document.getElementById('certCorrect').innerText = stats.correct;
+            document.getElementById('certScore').innerText = stats.score;
+            document.getElementById('certAccuracy').innerText = `${pct}%`;
+
+            document.getElementById('certificateModal').classList.remove('hidden');
+            playSuccessSound();
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('certificateModal').classList.add('hidden');
+        }
+
+        // دعم لوحة مفاتيح الكمبيوتر أثناء شاشة الإجابة
+        document.addEventListener('keydown', (e) => {
+            if (currentPhase === 'answer') {
+                if (e.key >= '0' && e.key <= '9') {
+                    e.preventDefault();
+                    appendDigit(e.key);
+                } else if (e.key === 'Backspace') {
+                    e.preventDefault();
+                    backspaceAnswer();
+                } else if (e.key === 'Escape' || e.key === 'Delete') {
+                    e.preventDefault();
+                    clearAnswer();
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    submitAnswer();
+                }
+            } else if (currentPhase === 'result' && e.key === 'Enter') {
+                e.preventDefault();
+                startNewChallenge();
+            }
+        });
+
+        window.onload = function() {
+            loadHeroName();
+            onMainLevelChange();
+            setSpeed(2);
+            setOps(4);
+            setTargetProblems(10);
+            setSubtraction(true);
+        };
+    </script>
+</body>
+</html>
